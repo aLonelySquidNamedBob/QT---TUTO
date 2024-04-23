@@ -1,1 +1,14 @@
 /.vscode
+ex_01/ex_01.pro.user
+.qtc_clangd
+ex_01/.qmake.stash
+ex_01/ex_01.pro
+ex_01/glwidget.cc
+ex_01/Makefile
+ex_01/Makefile.Debug
+ex_01/Makefile.Release
+ex_01/release/ex_01.exe
+ex_01/release/glwidget.o
+ex_01/release/main_qt_gl.o
+ex_01/release/qrc_resource.cpp
+ex_01/release/qrc_resource.o

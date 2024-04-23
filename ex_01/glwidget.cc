@@ -99,11 +99,11 @@ void GLWidget::paintGL()
 
   // On dessine un joli triangle coloré
   glBegin(GL_TRIANGLES);
-  prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0); // rouge
+  prog.setAttributeValue(CouleurId, 1.0, 1.0, 0.0); // rouge
   prog.setAttributeValue(SommetId,  0.0, 0.0, 0.0);
 
   prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0); // vert
-  prog.setAttributeValue(SommetId,  1.0, 0.0, 0.0);
+  prog.setAttributeValue(SommetId,  2.0, 0.0, 0.0);
 
   prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
   prog.setAttributeValue(SommetId,  1.0, 1.0, 0.0);

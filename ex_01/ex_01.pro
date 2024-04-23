@@ -2,8 +2,8 @@
 # Ce fichier est lu par le programme qmake pour générer le Makefile
 #
 
-QT += core gui opengl widgets
-QMAKE_CXXFLAGS += -std=c++11
+QT += core gui opengl widgets openglwidgets
+QMAKE_CXXFLAGS += -std=c++17
 
 win32:LIBS += -lopengl32
 
