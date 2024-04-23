@@ -13,20 +13,31 @@ void VueOpenGL::dessine(Contenu const& a_dessiner)
   QMatrix4x4 matrice; 
 
   // Multiplie la matrice à droite par une matrice de translation (0, 0, -4).
-  matrice.translate(0.0, 0.0, -5.0);  
-  matrice.rotate(-45, 1, 0, 0);
-  matrice.rotate(-45, 0, 0, 1);
-
+  matrice.translate(0.0, 0.0, -4.0);  
 
   // Multiplie la matrice à droite par une matrice de rotation de 60 degrés autour de l'axe Y.
-  // matrice.rotate(60.0, 0.0, 1.0, 0.0);
+  matrice.rotate(60.0, 0.0, 1.0, 0.0);
 
-  // // Multiplie la matrice à droite par une matrice de rotation de 45 degrés autour de l'axe Z.
-  // matrice.rotate(45.0, 0.0, 0.0, 1.0); 
-
-  matrice.translate(0.0, 0.0, 0.0);  
+  // Multiplie la matrice à droite par une matrice de rotation de 45 degrés autour de l'axe Z.
+  matrice.rotate(45.0, 0.0, 0.0, 1.0); 
 
   // Dessine le cube
+  dessineCube(matrice);
+
+  QMatrix4x4 reference(matrice); // sauvegarde le point de vue de référence
+
+  // Dessine le 2e cube
+  matrice.translate(0.0, 1.5, 0.0); // on se déplace de 1.5 au dessus (axe y)
+  matrice.scale(0.25); // on réduit le cube d'un facteur 0.25 (homothétie)
+  dessineCube(matrice); // et on dessine le cube
+
+  // Revient au point de référence
+  matrice = reference;
+  
+  // Dessine le 3e cube
+  matrice.translate(0.0, 0.0, 1.5);    // (3) puis on se déplace à droite (axe z)
+  matrice.scale(0.25);                 // (2) puis on réduit la taille
+  matrice.rotate(45.0, 0.0, 1.0, 0.0); // (1) on tourne de 45 degrés
   dessineCube(matrice);
 }
 
@@ -85,7 +96,6 @@ void VueOpenGL::init()
 // ======================================================================
 void VueOpenGL::dessineCube (QMatrix4x4 const& point_de_vue)
 {
-  // Passe la matrice point_de_vue au shader
   prog.setUniformValue("vue_modele", point_de_vue);
 
   glBegin(GL_QUADS);
@@ -100,14 +110,12 @@ void VueOpenGL::dessineCube (QMatrix4x4 const& point_de_vue)
   prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0); // vert
   prog.setAttributeValue(SommetId, -1.0, -1.0, -1.0);
   prog.setAttributeValue(SommetId, -1.0, -1.0, +1.0);
-  prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
   prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0);
-  prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0); // vert
   prog.setAttributeValue(SommetId, -1.0, +1.0, -1.0);
 
   // face coté Y = +1
   prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
-  prog.setAttributeValue(SommetId, -1.0, +4.0, -1.0);
+  prog.setAttributeValue(SommetId, -1.0, +1.0, -1.0);
   prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0);
   prog.setAttributeValue(SommetId, +1.0, +1.0, +1.0);
   prog.setAttributeValue(SommetId, +1.0, +1.0, -1.0);
