@@ -12,3 +12,4 @@ ex_01/release/glwidget.o
 ex_01/release/main_qt_gl.o
 ex_01/release/qrc_resource.cpp
 ex_01/release/qrc_resource.o
+ex_02/Makefile

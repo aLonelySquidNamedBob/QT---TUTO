@@ -1,5 +1,8 @@
 QT += core gui opengl widgets
-QMAKE_CXXFLAGS += -std=c++11
+contains(QT_VERSION, ^6\\..*) {
+    QT += openglwidgets
+}
+QMAKE_CXXFLAGS += -std=c++17
 
 win32:LIBS += -lopengl32
 

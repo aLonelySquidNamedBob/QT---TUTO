@@ -85,46 +85,42 @@ void VueOpenGL::dessineCube (QMatrix4x4 const& point_de_vue)
 
   glBegin(GL_QUADS);
   // face coté X = +1
-  prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0); // vert
+  prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0); // rouge
   prog.setAttributeValue(SommetId, +1.0, -1.0, -1.0);
   prog.setAttributeValue(SommetId, +1.0, +1.0, -1.0);
   prog.setAttributeValue(SommetId, +1.0, +1.0, +1.0);
   prog.setAttributeValue(SommetId, +1.0, -1.0, +1.0);
 
   // face coté X = -1
-  prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0); // rouge
+  prog.setAttributeValue(CouleurId, 0.0, 1.0, 0.0); // vert
   prog.setAttributeValue(SommetId, -1.0, -1.0, -1.0);
   prog.setAttributeValue(SommetId, -1.0, -1.0, +1.0);
-  prog.setAttributeValue(CouleurId, 0.0, 1.0, 1.0); // cyan
-  prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0); //
-  prog.setAttributeValue(CouleurId, 1.0, 0.0, 0.0); // rouge
+  prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0);
   prog.setAttributeValue(SommetId, -1.0, +1.0, -1.0);
 
   // face coté Y = +1
-  prog.setAttributeValue(CouleurId, 0.0, 1.0, 1.0); // cyan
+  prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
   prog.setAttributeValue(SommetId, -1.0, +1.0, -1.0);
-  prog.setAttributeValue(CouleurId, 0.0, 1.0, 1.0); // cyan
-  prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0); //
+  prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0);
   prog.setAttributeValue(SommetId, +1.0, +1.0, +1.0);
   prog.setAttributeValue(SommetId, +1.0, +1.0, -1.0);
 
   // face coté Y = -1
-  prog.setAttributeValue(CouleurId, 0.0, 0.0, 1.0); // bleu
+  prog.setAttributeValue(CouleurId, 0.0, 1.0, 1.0); // cyan
   prog.setAttributeValue(SommetId, -1.0, -1.0, -1.0);
   prog.setAttributeValue(SommetId, +1.0, -1.0, -1.0);
   prog.setAttributeValue(SommetId, +1.0, -1.0, +1.0);
   prog.setAttributeValue(SommetId, -1.0, -1.0, +1.0);
 
   // face coté Z = +1
-  prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0); // magenta
+  prog.setAttributeValue(CouleurId, 1.0, 1.0, 0.0); // jaune
   prog.setAttributeValue(SommetId, -1.0, -1.0, +1.0);
   prog.setAttributeValue(SommetId, +1.0, -1.0, +1.0);
   prog.setAttributeValue(SommetId, +1.0, +1.0, +1.0);
-  prog.setAttributeValue(CouleurId, 0.0, 1.0, 1.0); // cyan
-  prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0); //
+  prog.setAttributeValue(SommetId, -1.0, +1.0, +1.0);
 
   // face coté Z = -1
-  prog.setAttributeValue(CouleurId, 1.0, 1.0, 0.0); // jaune
+  prog.setAttributeValue(CouleurId, 1.0, 0.0, 1.0); // magenta
   prog.setAttributeValue(SommetId, -1.0, -1.0, -1.0);
   prog.setAttributeValue(SommetId, -1.0, +1.0, -1.0);
   prog.setAttributeValue(SommetId, +1.0, +1.0, -1.0);
