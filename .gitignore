@@ -19,6 +19,7 @@ ex_02/text/Makefile
 ex_02/text/Makefile.Debug
 ex_02/text/Makefile.Release
 ex_02/text/release/
+
 ex_03/.qmake.stash
 ex_03/Makefile
 ex_03/Qt_GL/Makefile
@@ -29,3 +30,10 @@ ex_03/text/Makefile
 ex_03/text/Makefile.Debug
 ex_03/text/Makefile.Release
 ex_03/text/release/
+
+ex_04/.qmake.stash
+ex_04/Makefile
+ex_04/Qt_GL/Makefile
+ex_04/Qt_GL/Makefile.Debug
+ex_04/Qt_GL/Makefile.Release
+ex_04/Qt_GL/release/
