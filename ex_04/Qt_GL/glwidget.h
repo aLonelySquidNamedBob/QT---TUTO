@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QOpenGLWidget>        // Classe pour faire une fenêtre OpenGL
+#include <QElapsedTimer>        // Classe pour gérer le temps
 #include "vue_opengl.h"
 #include "contenu.h"
 
@@ -12,7 +13,7 @@ class GLWidget : public QOpenGLWidget
 public:
   GLWidget(QWidget* parent = nullptr)
     : QOpenGLWidget(parent)
-  {}
+  { chronometre.restart(); }
   virtual ~GLWidget() = default;
 
 private:
@@ -23,9 +24,18 @@ private:
 
   // Méthodes de gestion d'évènements
   virtual void keyPressEvent(QKeyEvent* event) override;
+  virtual void timerEvent(QTimerEvent* event)  override;
+
+
+
 
   // Vue : ce qu'il faut donner au contenu pour qu'il puisse se dessiner sur la vue
   VueOpenGL vue;
+
+  // timer
+  int timerId;
+  // pour faire évoluer les objets avec le bon "dt"
+  QElapsedTimer chronometre;
 
   // objets à dessiner
   Contenu c;

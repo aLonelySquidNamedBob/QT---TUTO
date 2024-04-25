@@ -5,7 +5,7 @@
 // ======================================================================
 void VueOpenGL::dessine(Contenu const& a_dessiner)
 {
-  Q_UNUSED(a_dessiner); // dans cet exemple simple on n'utilise pas le paramètre
+  // Q_UNUSED(a_dessiner); // dans cet exemple simple on n'utilise pas le paramètre
 
    // Dessine le 1er cube (à l'origine)
   dessineCube();
@@ -19,8 +19,10 @@ void VueOpenGL::dessine(Contenu const& a_dessiner)
   // Dessine le 3e cube
   matrice.setToIdentity();
   matrice.translate(0.0, 0.0, 1.5);
-  matrice.scale(0.25);
   matrice.rotate(45.0, 0.0, 1.0, 0.0);
+  matrice.translate(a_dessiner.getY(), a_dessiner.getX(), 0);
+  // matrice.rotate(a_dessiner.getTheta(), 0, 1, 0);
+  matrice.scale(0.25);
   dessineCube(matrice);
 }
 

@@ -2,11 +2,13 @@
 #include <QTimerEvent>
 #include <QMatrix4x4>
 #include "glwidget.h"
+#include "contenu.h"
 
 // ======================================================================
 void GLWidget::initializeGL()
 {
   vue.init();
+  timerId = startTimer(20);
 }
 
 // ======================================================================
@@ -101,4 +103,15 @@ void GLWidget::keyPressEvent(QKeyEvent* event)
   };
 
   update(); // redessine
+}
+
+
+void GLWidget::timerEvent(QTimerEvent* event) {
+  Q_UNUSED(event);
+
+  const double dt = chronometre.elapsed();
+  chronometre.restart();
+
+  c.evolue(dt);
+  update();
 }
