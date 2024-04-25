@@ -44,58 +44,55 @@ void GLWidget::paintGL()
 void GLWidget::keyPressEvent(QKeyEvent* event)
 {
   constexpr double petit_angle(5.0); // en degrés
+  constexpr double dist = 5;
   constexpr double petit_pas(1.0);
 
   switch (event->key()) {
 
-  case Qt::Key_Left:
-    vue.rotate(petit_angle, 0.0, -1.0, 0.0);
-    break;
-
-  case Qt::Key_Right:
-    vue.rotate(petit_angle, 0.0, +1.0, 0.0);
-    break;
-
-  case Qt::Key_Up:
-    vue.rotate(petit_angle, -1.0, 0.0, 0.0);
-    break;
-
-  case Qt::Key_Down:
-    vue.rotate(petit_angle, +1.0, 0.0, 0.0);
-    break;
-
   case Qt::Key_PageUp:
-  case Qt::Key_W:
-    vue.translate(0.0, 0.0,  petit_pas);
+  case Qt::Key_Z:
+    vue.translate(0, 0, dist);
+    vue.rotate(-petit_angle, 1, 0, 0);
+    vue.translate(0, 0, -dist);
     break;
 
   case Qt::Key_PageDown:
   case Qt::Key_S:
-    vue.translate(0.0, 0.0, -petit_pas);
-    break;
-
-  case Qt::Key_A:
-    vue.translate( petit_pas, 0.0, 0.0);
-    break;
-
-  case Qt::Key_D:
-    vue.translate(-petit_pas, 0.0, 0.0);
-    break;
-
-  case Qt::Key_R:
-    vue.translate(0.0, -petit_pas, 0.0);
-    break;
-
-  case Qt::Key_F:
-    vue.translate(0.0,  petit_pas, 0.0);
+    vue.translate(0, 0, dist);
+    vue.rotate(petit_angle, 1, 0, 0);
+    vue.translate(0, 0, -dist);
     break;
 
   case Qt::Key_Q:
-    vue.rotate(petit_angle, 0.0, 0.0, -1.0);
+    vue.translate(0, 0, dist);
+    vue.rotate(-petit_angle, 0, 1, 0);
+    vue.translate(0, 0, -dist);
+    break;
+
+  case Qt::Key_D:
+    vue.translate(0, 0, dist);
+    vue.rotate(petit_angle, 0, 1, 0);
+    vue.translate(0, 0, -dist);
+    break;
+
+  case Qt::Key_Space:
+    vue.translate(0.0, -petit_pas, 0.0);
+    break;
+
+  case Qt::Key_Shift:
+    vue.translate(0.0,  petit_pas, 0.0);
+    break;
+
+  case Qt::Key_A:
+    vue.translate(0, 0, dist);
+    vue.rotate(-petit_angle, 0, 0, 1);
+    vue.translate(0, 0, -dist);
     break;
 
   case Qt::Key_E:
-    vue.rotate(petit_angle, 0.0, 0.0, +1.0);
+    vue.translate(0, 0, dist);
+    vue.rotate(petit_angle, 0, 0, 1);
+    vue.translate(0, 0, -dist);
     break;
 
   case Qt::Key_Home:
