@@ -1,6 +1,11 @@
 #pragma once
 
-class Contenu;
+// class Contenu;
+// class Machin;
+// class QuiTourne;
+class Bloc;
+class Dervish;
+class Moucheron;
 
 class SupportADessin
 {
@@ -15,7 +20,12 @@ class SupportADessin
 
   SupportADessin() = default;
 
-  virtual void dessine(Contenu const& a_dessiner) = 0;
+//   virtual void dessine(Contenu const& a_dessiner) = 0;
+//   virtual void dessine(QuiTourne const& a_dessiner) = 0;
+//   virtual void dessine(Machin const& a_dessiner) = 0;
+  virtual void dessine(Bloc const& a_dessiner) = 0;
+  virtual void dessine(Dervish const& a_dessiner) = 0;
+  virtual void dessine(Moucheron const& a_dessiner) = 0;
 
   /* Mettre ici toutes les méthodes nécessaires pour dessiner tous les
    * objets que l'on veut dessiner. Par exemple :

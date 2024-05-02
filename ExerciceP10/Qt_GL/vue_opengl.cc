@@ -1,11 +1,12 @@
 #include "vue_opengl.h"
 #include "vertex_shader.h" // Identifiants Qt de nos différents attributs
 #include "contenu.h"
+#include "moucheron.h"
+#include "dervish.h"
 
 // ======================================================================
-void VueOpenGL::dessine(Contenu const& a_dessiner)
-{
-   // Dessine le 1er cube (à l'origine)
+void VueOpenGL::dessine(Bloc const& a_dessiner) {
+  // Dessine le 1er cube (à l'origine)
   dessineCube();
 
   QMatrix4x4 matrice;
@@ -13,25 +14,33 @@ void VueOpenGL::dessine(Contenu const& a_dessiner)
   matrice.translate(0.0, 1.5, 0.0);
   matrice.scale(0.25);
   dessineCube(matrice);
+}
+
+void VueOpenGL::dessine(Dervish const& a_dessiner) {
+  QMatrix4x4 matrice;
 
   // Dessine le 3e cube
   matrice.setToIdentity();
   matrice.translate(0.0, 0.0, 1.5);
   matrice.scale(0.25);
-  matrice.rotate(45.0, 0.0, 1.0, 0.0);
+  matrice.rotate(45.0 + 3.0 * a_dessiner.infos(), 0.0, 1.0, 0.0);
   dessineCube(matrice);
+}
+
+void VueOpenGL::dessine(Moucheron const& a_dessiner) {
+  QMatrix4x4 matrice;
 
   // Dessine le 4e cube
   matrice.setToIdentity();
-  matrice.rotate(a_dessiner.infos(), 1.0, 0.0, 0.0);
+  matrice.rotate(10, 1.0, 0.0, 0.0);
   matrice.translate(0.0, 2.3, 0.0);
+  matrice.rotate(45.0 + 3.0 * a_dessiner.infos(), 0.0, 1.0, 0.0);
   matrice.scale(0.2);
   dessineCube(matrice);
 }
 
 // ======================================================================
-void VueOpenGL::init()
-{
+void VueOpenGL::init() {
   /* Initialise notre vue OpenGL.
    * Dans cet exemple, nous créons et activons notre shader.
    *
@@ -51,7 +60,7 @@ void VueOpenGL::init()
    *   - applique la couleur qu'on lui donne
    */
 
-  prog.addShaderFromSourceFile(QOpenGLShader::Vertex,   ":/vertex_shader.glsl");
+  prog.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/vertex_shader.glsl");
   prog.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/fragment_shader.glsl");
 
   /* Identifie les deux attributs du shader de cet exemple
@@ -64,7 +73,7 @@ void VueOpenGL::init()
    * (après la couleur dans cet exemple, voir plus bas).
    */
 
-  prog.bindAttributeLocation("sommet",  SommetId);
+  prog.bindAttributeLocation("sommet", SommetId);
   prog.bindAttributeLocation("couleur", CouleurId);
 
   // Activation du shader
@@ -84,8 +93,7 @@ void VueOpenGL::init()
 }
 
 // ======================================================================
-void VueOpenGL::initializePosition()
-{
+void VueOpenGL::initializePosition() {
   // position initiale
   matrice_vue.setToIdentity();
   matrice_vue.translate(0.0, 0.0, -4.0);
@@ -94,8 +102,7 @@ void VueOpenGL::initializePosition()
 }
 
 // ======================================================================
-void VueOpenGL::translate(double x, double y, double z)
-{
+void VueOpenGL::translate(double x, double y, double z) {
   /* Multiplie la matrice de vue par LA GAUCHE.
    * Cela fait en sorte que la dernière modification apportée
    * à la matrice soit appliquée en dernier (composition de fonctions).
@@ -106,8 +113,7 @@ void VueOpenGL::translate(double x, double y, double z)
 }
 
 // ======================================================================
-void VueOpenGL::rotate(double angle, double dir_x, double dir_y, double dir_z)
-{
+void VueOpenGL::rotate(double angle, double dir_x, double dir_y, double dir_z) {
   // Multiplie la matrice de vue par LA GAUCHE
   QMatrix4x4 rotation_supplementaire;
   rotation_supplementaire.rotate(angle, dir_x, dir_y, dir_z);
@@ -115,8 +121,7 @@ void VueOpenGL::rotate(double angle, double dir_x, double dir_y, double dir_z)
 }
 
 // ======================================================================
-void VueOpenGL::dessineCube (QMatrix4x4 const& point_de_vue)
-{
+void VueOpenGL::dessineCube(QMatrix4x4 const& point_de_vue) {
   prog.setUniformValue("vue_modele", matrice_vue * point_de_vue);
 
   glBegin(GL_QUADS);

@@ -11,10 +11,10 @@ class GLWidget : public QOpenGLWidget
  */
 {
 public:
-  GLWidget(QWidget* parent = nullptr)
-    : QOpenGLWidget(parent)
-  { chronometre.restart(); }
+  GLWidget(QWidget* parent = nullptr);
   virtual ~GLWidget() = default;
+
+  void ajoute(std::unique_ptr<Machin> machin);
 
 private:
   // Les 3 méthodes clés de la classe QOpenGLWidget à réimplémenter

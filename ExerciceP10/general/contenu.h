@@ -2,28 +2,31 @@
 
 #include "dessinable.h"
 #include "support_a_dessin.h"
+#include <memory>
+#include <vector>
+#include "machin.h"
 
 class Contenu : public Dessinable {
 public:
-  Contenu()
-    : angle(0.0)
-  {}
+  Contenu() = default;
   virtual ~Contenu() = default;
-  Contenu(Contenu const&)            = default;
+  Contenu(Contenu const&) = default;
   Contenu& operator=(Contenu const&) = default;
-  Contenu(Contenu&&)                 = default;
-  Contenu& operator=(Contenu&&)      = default;
+  Contenu(Contenu&&) = default;
+  Contenu& operator=(Contenu&&) = default;
 
-  virtual void dessine_sur(SupportADessin& support) override
-  { support.dessine(*this); }
+  virtual void dessine_sur(SupportADessin& support) override {
+    for (auto& machin : machins) {
+      machin->dessine_sur(support);
+    }
+  }
 
-  void evolue(double dt);
+  void evolue(double dt) { for (auto& machin : machins) { machin->evolue(dt); } }
 
-  // accesseur
-  double infos() const { return angle; }
+  void ajoute(std::unique_ptr<Machin> machin) { machins.push_back(std::move(machin)); }
+
+  double infos() const { return machins.size(); }
 
 private:
-  double angle; /* pour le mouvement ;
-                   dans cet exemple, juste une rotation
-                   au cours du temps                    */
+  std::vector<std::unique_ptr<Machin>> machins;
 };

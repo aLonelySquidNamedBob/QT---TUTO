@@ -2,25 +2,32 @@
 #include <QTimerEvent>
 #include <QMatrix4x4>
 #include "glwidget.h"
+#include "moucheron.h"
+
+GLWidget::GLWidget(QWidget* parent) : QOpenGLWidget(parent) {
+  chronometre.restart();
+
+  std::unique_ptr<Machin> p1(new Moucheron);
+
+  c.ajoute(std::move(p1));
+}
 
 // ======================================================================
-void GLWidget::initializeGL()
-{
+void GLWidget::initializeGL() {
   vue.init();
   timerId = startTimer(20);
 }
 
 // ======================================================================
-void GLWidget::resizeGL(int width, int height)
-{
-  /* On commance par dire sur quelle partie de la 
+void GLWidget::resizeGL(int width, int height) {
+  /* On commance par dire sur quelle partie de la
    * fenêtre OpenGL doit dessiner.
    * Ici on lui demande de dessiner sur toute la fenêtre.
    */
   glViewport(0, 0, width, height);
 
   /* Puis on modifie la matrice de projection du shader.
-   * Pour ce faire on crée une matrice identité (constructeur 
+   * Pour ce faire on crée une matrice identité (constructeur
    * par défaut), on la multiplie par la droite par une matrice
    * de perspective.
    * Plus de détail sur cette matrice
@@ -34,16 +41,14 @@ void GLWidget::resizeGL(int width, int height)
 }
 
 // ======================================================================
-void GLWidget::paintGL()
-{
+void GLWidget::paintGL() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   c.dessine_sur(vue);
 }
 
 
 // ======================================================================
-void GLWidget::keyPressEvent(QKeyEvent* event)
-{
+void GLWidget::keyPressEvent(QKeyEvent* event) {
   constexpr double petit_angle(5.0); // en degrés
   constexpr double petit_pas(1.0);
 
@@ -67,7 +72,7 @@ void GLWidget::keyPressEvent(QKeyEvent* event)
 
   case Qt::Key_PageUp:
   case Qt::Key_W:
-    vue.translate(0.0, 0.0,  petit_pas);
+    vue.translate(0.0, 0.0, petit_pas);
     break;
 
   case Qt::Key_PageDown:
@@ -76,7 +81,7 @@ void GLWidget::keyPressEvent(QKeyEvent* event)
     break;
 
   case Qt::Key_A:
-    vue.translate( petit_pas, 0.0, 0.0);
+    vue.translate(petit_pas, 0.0, 0.0);
     break;
 
   case Qt::Key_D:
@@ -88,7 +93,7 @@ void GLWidget::keyPressEvent(QKeyEvent* event)
     break;
 
   case Qt::Key_F:
-    vue.translate(0.0,  petit_pas, 0.0);
+    vue.translate(0.0, petit_pas, 0.0);
     break;
 
   case Qt::Key_Q:
@@ -104,16 +109,15 @@ void GLWidget::keyPressEvent(QKeyEvent* event)
     break;
 
   case Qt::Key_Space:
-	pause();
-	break;
+    pause();
+    break;
   };
 
   update(); // redessine
 }
 
 // ======================================================================
-void GLWidget::timerEvent(QTimerEvent* event)
-{
+void GLWidget::timerEvent(QTimerEvent* event) {
   Q_UNUSED(event);
 
   const double dt = chronometre.elapsed() / 1000.0;
@@ -124,15 +128,14 @@ void GLWidget::timerEvent(QTimerEvent* event)
 }
 
 // ======================================================================
-void GLWidget::pause()
-{
+void GLWidget::pause() {
   if (timerId == 0) {
-	// dans ce cas le timer ne tourne pas alors on le lance
-	timerId = startTimer(20);
-	chronometre.restart();
+    // dans ce cas le timer ne tourne pas alors on le lance
+    timerId = startTimer(20);
+    chronometre.restart();
   } else {
-	// le timer tourne alors on l'arrête
-	killTimer(timerId);
-	timerId = 0;
+    // le timer tourne alors on l'arrête
+    killTimer(timerId);
+    timerId = 0;
   }
 }

@@ -16,7 +16,12 @@ public:
   TextViewer(TextViewer&&)            = default;
   TextViewer& operator=(TextViewer&&) = default;
 
-  virtual void dessine(Contenu const& a_dessiner) override;
+  // virtual void dessine(Contenu const& a_dessiner) override;
+  // virtual void dessine(Machin const& a_dessiner) override {};
+  // virtual void dessine(QuiTourne const& a_dessiner) override {};
+  virtual void dessine(Bloc const& a_dessiner) override;
+  virtual void dessine(Moucheron const& a_dessiner) override;
+  virtual void dessine(Dervish const& a_dessiner) override;
 
 private:
   std::ostream& flot;

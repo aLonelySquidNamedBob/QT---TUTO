@@ -1,12 +1,17 @@
 #include <iostream>
 #include "text_viewer.h"
 #include "contenu.h"
+#include "moucheron.h"
 using namespace std;
 
 int main()
 {
   TextViewer ecran(cout);
   Contenu c;
+
+  unique_ptr<Machin> p1(new Moucheron);
+
+  c.ajoute(move(p1));
 
   cout << "Au départ :" << endl;
   c.dessine_sur(ecran);

@@ -3,7 +3,7 @@ TEMPLATE = lib
 CONFIG = staticlib
 QMAKE_CXXFLAGS += -std=c++17
 
-SOURCES = contenu.cc
+SOURCES = quitourne.cc
 
 HEADERS += \
     contenu.h \

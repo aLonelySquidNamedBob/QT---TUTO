@@ -1,7 +1,7 @@
-#include "contenu.h"
+#include "quitourne.h"
 
 // ======================================================================
-void Contenu::evolue(double dt)
+void QuiTourne::evolue(double dt)
 {
   constexpr double omega(100.0);
   angle += omega * dt;
