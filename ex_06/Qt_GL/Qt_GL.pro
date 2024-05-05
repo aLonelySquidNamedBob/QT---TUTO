@@ -1,0 +1,30 @@
+QT += core gui opengl widgets
+contains(QT_VERSION, ^6\\..*) {
+    QT += openglwidgets
+}
+QMAKE_CXXFLAGS += -std=c++17
+
+win32:LIBS += -lopengl32
+
+
+TARGET = ex_06_gl
+
+INCLUDEPATH = ../general
+
+SOURCES += \
+    main_qt_gl.cc \
+    glwidget.cc \
+    glsphere.cc \
+    vue_opengl.cc
+
+HEADERS += \
+    glwidget.h \
+    vertex_shader.h \
+    vue_opengl.h \
+    glsphere.h \
+    ../general/dessinable.h \
+    ../general/support_a_dessin.h \
+    ../general/contenu.h
+
+RESOURCES += \
+    resource.qrc
